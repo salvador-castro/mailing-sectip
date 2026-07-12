@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TipTap / ProseMirror base styles */
+.ProseMirror {
+  outline: none;
+  min-height: 80px;
+}
+
+.ProseMirror p {
+  margin: 0.4em 0;
+}
+
+.ProseMirror p:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror p:last-child {
+  margin-bottom: 0;
+}

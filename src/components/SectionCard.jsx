@@ -54,7 +54,7 @@ export default function SectionCard({ section, index, total, onChange, onRemove,
             type="text"
             value={title}
             onChange={(e) => onChange({ title: e.target.value })}
-            placeholder="Ej: Convocatoria PID UTN 2022"
+            placeholder="Ej: Convocatoria PID UTN 2026"
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#b71234]/30 focus:border-[#b71234] transition-colors"
           />
         </div>

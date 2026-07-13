@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SectionCard from './components/SectionCard'
 import ExportStep from './components/ExportStep'
 import { generateHTML } from './utils/generateHTML'
+import { Analytics } from "@vercel/analytics/react"
 
 function newSection() {
   return {
@@ -110,8 +111,8 @@ export default function App() {
             <button
               onClick={() => setStep(1)}
               className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${step === 1
-                  ? 'border-[#b71234] text-[#b71234]'
-                  : 'border-transparent text-gray-400 hover:text-gray-600 cursor-pointer'
+                ? 'border-[#b71234] text-[#b71234]'
+                : 'border-transparent text-gray-400 hover:text-gray-600 cursor-pointer'
                 }`}
             >
               1. Contenido
@@ -119,8 +120,8 @@ export default function App() {
             <button
               onClick={step === 1 ? handleGoToStep2 : undefined}
               className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${step === 2
-                  ? 'border-[#b71234] text-[#b71234]'
-                  : 'border-transparent text-gray-400 hover:text-gray-600 cursor-pointer'
+                ? 'border-[#b71234] text-[#b71234]'
+                : 'border-transparent text-gray-400 hover:text-gray-600 cursor-pointer'
                 }`}
             >
               2. Exportar
@@ -184,6 +185,7 @@ export default function App() {
       <div className="fixed bottom-3 right-4 pointer-events-none">
         <span className="text-xs text-black font-medium">Desarrollado por salvaCastro</span>
       </div>
+      <Analytics />
     </div>
   )
 }

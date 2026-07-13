@@ -92,7 +92,7 @@ export default function App() {
   const html = generateHTML(sections)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-8">
 
       {/* Header */}
       <header className="bg-[#b71234] text-white shadow-md">

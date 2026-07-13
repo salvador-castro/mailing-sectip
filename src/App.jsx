@@ -181,7 +181,7 @@ export default function App() {
 
       <div className="flex justify-between px-4 py-3">
         <span className="text-xs text-black font-medium">v1.0</span>
-        <span className="text-xs text-black font-medium">Desarrollado por salvaCastro</span>
+        <a href="https://salvadorcastro.vercel.app/" target="_blank" rel="noreferrer" className="text-xs text-black font-medium hover:underline">Desarrollado por salvaCastro</a>
       </div>
       <Analytics />
     </div>

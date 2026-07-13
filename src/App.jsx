@@ -178,6 +178,9 @@ export default function App() {
 
       </main>
 
+      <div className="fixed bottom-3 left-4 pointer-events-none">
+        <span className="text-xs text-black font-medium">v1.0</span>
+      </div>
       <div className="fixed bottom-3 right-4 pointer-events-none">
         <span className="text-xs text-black font-medium">Desarrollado por salvaCastro</span>
       </div>

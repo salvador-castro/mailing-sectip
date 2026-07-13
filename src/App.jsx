@@ -11,17 +11,51 @@ function newSection() {
     imageAlt: '',
     body: '',
     hasButton: false,
-    buttonText: 'Más información',
+    buttonText: '',
     buttonHref: '',
   }
+}
+
+function isBodyEmpty(html) {
+  if (!html || html.trim() === '') return true
+  return html.replace(/<[^>]*>/g, '').trim() === ''
+}
+
+function validateSections(sections) {
+  const errors = {}
+  sections.forEach((s) => {
+    const e = {}
+    if (!s.title.trim()) e.title = 'El título es obligatorio'
+    if (!s.imageUrl.trim() && isBodyEmpty(s.body)) e.content = 'Ingresá al menos una imagen o texto'
+    if (s.hasButton) {
+      if (!s.buttonText.trim()) e.buttonText = 'Ingresá el texto del botón'
+      if (!s.buttonHref.trim()) e.buttonHref = 'Ingresá la URL del botón'
+    }
+    if (Object.keys(e).length > 0) errors[s.id] = e
+  })
+  return errors
 }
 
 export default function App() {
   const [step, setStep] = useState(1)
   const [sections, setSections] = useState([newSection()])
+  const [sectionErrors, setSectionErrors] = useState({})
 
   function updateSection(id, changes) {
     setSections((prev) => prev.map((s) => (s.id === id ? { ...s, ...changes } : s)))
+    // clear errors for changed fields
+    if (sectionErrors[id]) {
+      setSectionErrors((prev) => {
+        const updated = { ...prev[id] }
+        Object.keys(changes).forEach((k) => {
+          if (k === 'title') delete updated.title
+          if (k === 'imageUrl' || k === 'body') delete updated.content
+          if (k === 'buttonText') delete updated.buttonText
+          if (k === 'buttonHref') delete updated.buttonHref
+        })
+        return Object.keys(updated).length > 0 ? { ...prev, [id]: updated } : (() => { const n = { ...prev }; delete n[id]; return n })()
+      })
+    }
   }
 
   function addSection() {
@@ -44,6 +78,16 @@ export default function App() {
     })
   }
 
+  function handleGoToStep2() {
+    const errors = validateSections(sections)
+    if (Object.keys(errors).length > 0) {
+      setSectionErrors(errors)
+      return
+    }
+    setSectionErrors({})
+    setStep(2)
+  }
+
   const html = generateHTML(sections)
 
   return (
@@ -51,11 +95,14 @@ export default function App() {
 
       {/* Header */}
       <header className="bg-[#b71234] text-white shadow-md">
-        <div className="max-w-3xl mx-auto px-4 py-4 flex items-center gap-4">
-          <div>
-            <h1 className="text-lg font-bold leading-tight">Editor de Mailing</h1>
+        <div className="max-w-3xl mx-auto px-4 py-4 relative flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-lg font-bold leading-tight">Mailing</h1>
             <p className="text-sm opacity-75">SECTIP · UTN FRBA</p>
           </div>
+          <span className="absolute right-4 bottom-2 text-xs text-black/60">
+            Desarrollado por salvaCastro
+          </span>
         </div>
       </header>
 
@@ -74,7 +121,7 @@ export default function App() {
               1. Contenido
             </button>
             <button
-              onClick={() => setStep(2)}
+              onClick={step === 1 ? handleGoToStep2 : undefined}
               className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${
                 step === 2
                   ? 'border-[#b71234] text-[#b71234]'
@@ -104,6 +151,7 @@ export default function App() {
                   section={section}
                   index={idx}
                   total={sections.length}
+                  errors={sectionErrors[section.id] || {}}
                   onChange={(changes) => updateSection(section.id, changes)}
                   onRemove={() => removeSection(section.id)}
                   onMove={(dir) => moveSection(section.id, dir)}
@@ -122,7 +170,7 @@ export default function App() {
               <div className="flex-1" />
 
               <button
-                onClick={() => setStep(2)}
+                onClick={handleGoToStep2}
                 className="px-6 py-2.5 bg-[#b71234] text-white rounded-lg font-semibold text-sm hover:bg-[#9a0f2a] transition-colors shadow-sm"
               >
                 Siguiente →

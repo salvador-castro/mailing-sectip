@@ -40,11 +40,10 @@ export default function ExportStep({ html, onBack }) {
         <div className="flex flex-wrap gap-3">
           <button
             onClick={handleCopy}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all ${
-              copied
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all ${copied
                 ? 'bg-green-600 text-white'
                 : 'bg-[#b71234] text-white hover:bg-[#9a0f2a]'
-            }`}
+              }`}
           >
             {copied ? '✓ ¡Copiado!' : 'Copiar HTML'}
           </button>
@@ -60,7 +59,7 @@ export default function ExportStep({ html, onBack }) {
             onClick={handlePreview}
             className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
           >
-            Ver preview ↗
+            Vista previa ↗
           </button>
         </div>
       </div>

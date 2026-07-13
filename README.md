@@ -34,14 +34,6 @@ npm run preview
    - Botón opcional, con texto y link (URL, debe empezar con `https://`).
 2. **Exportar**: copiá el HTML generado y pegalo directamente en el editor del [SIA](https://sia.frba.utn.edu.ar/) — no se sube ningún archivo. Opcionalmente, descargá el `.html` como respaldo o abrí una vista previa antes de usarlo.
 
-## Versionado
-
-El número de versión se mantiene manualmente en `package.json` (`version`) siguiendo [SemVer](https://semver.org/) y se refleja automáticamente en el footer de la app (inyectado en build time vía `vite.config.js`). Al mergear un cambio a producción, se bumpea a mano:
-
-- **patch** (`1.0.0` → `1.0.1`): fixes o cambios chicos (docs, ajustes de texto).
-- **minor** (`1.0.0` → `1.1.0`): funcionalidad nueva compatible.
-- **major** (`1.0.0` → `2.0.0`): cambios grandes o que rompen lo existente.
-
 ## Deploy
 
-Desplegado en Vercel (`vercel.json` incluido): [mailing-sectip.vercel.app](https://mailing-sectip.vercel.app/)
+Desplegado en Vercel (`vercel.json` incluido): <a href="https://mailing-sectip.vercel.app/" target="_blank" rel="noopener noreferrer">https://mailing-sectip.vercel.app/</a>

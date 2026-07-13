@@ -34,15 +34,24 @@ export default function ExportStep({ html, onBack }) {
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-gray-800 mb-1">Listo para exportar</h2>
         <p className="text-sm text-gray-500 mb-6">
-          Copiá el HTML y pegalo en tu cliente de correo, o descargá el archivo .html.
+          Copiá el HTML y pegalo en el{' '}
+          <a
+            href="https://sia.frba.utn.edu.ar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            SIA
+          </a>
+          , o descargá el archivo .html.
         </p>
 
         <div className="flex flex-wrap gap-3">
           <button
             onClick={handleCopy}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all ${copied
-                ? 'bg-green-600 text-white'
-                : 'bg-[#b71234] text-white hover:bg-[#9a0f2a]'
+              ? 'bg-green-600 text-white'
+              : 'bg-[#b71234] text-white hover:bg-[#9a0f2a]'
               }`}
           >
             {copied ? '✓ ¡Copiado!' : 'Copiar HTML'}

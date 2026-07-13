@@ -69,11 +69,20 @@ ${parts.join('\n')}
       </tr>`
 }
 
+function buildPreheader(sections) {
+  return sections
+    .map((s) => s.title.trim())
+    .filter(Boolean)
+    .join(' | ')
+}
+
 export function generateHTML(sections) {
   const sectionBlocks = sections
     .map(sectionBlock)
     .filter(Boolean)
     .join('\n')
+
+  const preheader = buildPreheader(sections)
 
   return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -84,7 +93,13 @@ export function generateHTML(sections) {
 </head>
 
 <body>
-
+${preheader ? `  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#ffffff;">
+    ${escapeHtml(preheader)}
+  </div>
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">
+    &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+` : ''}
   <table style="max-width:590px!important;width:590px;" border="0" width="590" cellspacing="0" cellpadding="0" align="center">
     <tbody>
 

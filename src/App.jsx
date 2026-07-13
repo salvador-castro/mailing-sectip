@@ -92,7 +92,7 @@ export default function App() {
   const html = generateHTML(sections)
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
 
       {/* Header */}
       <header className="bg-[#b71234] text-white shadow-md">
@@ -130,7 +130,7 @@ export default function App() {
         </div>
       </div>
 
-      <main className="max-w-3xl mx-auto px-4 py-8">
+      <main className="flex-1 max-w-3xl mx-auto px-4 py-8 w-full">
 
         {step === 1 ? (
           <>
@@ -179,10 +179,8 @@ export default function App() {
 
       </main>
 
-      <div className="fixed bottom-3 left-4 pointer-events-none">
+      <div className="flex justify-between px-4 py-3">
         <span className="text-xs text-black font-medium">v1.0</span>
-      </div>
-      <div className="fixed bottom-3 right-4 pointer-events-none">
         <span className="text-xs text-black font-medium">Desarrollado por salvaCastro</span>
       </div>
       <Analytics />

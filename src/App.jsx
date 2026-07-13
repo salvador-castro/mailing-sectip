@@ -73,7 +73,7 @@ export default function App() {
       const swapIdx = dir === 'up' ? idx - 1 : idx + 1
       if (swapIdx < 0 || swapIdx >= prev.length) return prev
       const next = [...prev]
-      ;[next[idx], next[swapIdx]] = [next[swapIdx], next[idx]]
+        ;[next[idx], next[swapIdx]] = [next[swapIdx], next[idx]]
       return next
     })
   }
@@ -97,7 +97,7 @@ export default function App() {
       <header className="bg-[#b71234] text-white shadow-md">
         <div className="max-w-3xl mx-auto px-4 py-4 relative flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-lg font-bold leading-tight">Mailing</h1>
+            <h1 className="text-lg font-bold leading-tight">MAILING v1.0</h1>
             <p className="text-sm opacity-75">SECTIP · UTN FRBA</p>
           </div>
         </div>
@@ -109,21 +109,19 @@ export default function App() {
           <div className="flex">
             <button
               onClick={() => setStep(1)}
-              className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${
-                step === 1
+              className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${step === 1
                   ? 'border-[#b71234] text-[#b71234]'
                   : 'border-transparent text-gray-400 hover:text-gray-600 cursor-pointer'
-              }`}
+                }`}
             >
               1. Contenido
             </button>
             <button
               onClick={step === 1 ? handleGoToStep2 : undefined}
-              className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${
-                step === 2
+              className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${step === 2
                   ? 'border-[#b71234] text-[#b71234]'
                   : 'border-transparent text-gray-400 hover:text-gray-600 cursor-pointer'
-              }`}
+                }`}
             >
               2. Exportar
             </button>

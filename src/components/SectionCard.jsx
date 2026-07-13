@@ -1,7 +1,13 @@
+import { useEffect, useState } from 'react'
 import RichTextEditor from './RichTextEditor'
 
 export default function SectionCard({ section, index, total, errors, onChange, onRemove, onMove }) {
   const { title, imageUrl, imageAlt, body, hasButton, buttonText, buttonHref } = section
+  const [imageStatus, setImageStatus] = useState('idle') // idle | loading | success | error
+
+  useEffect(() => {
+    setImageStatus(imageUrl.trim() ? 'loading' : 'idle')
+  }, [imageUrl])
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
@@ -87,18 +93,30 @@ export default function SectionCard({ section, index, total, errors, onChange, o
                 type="text"
                 value={imageAlt}
                 onChange={(e) => onChange({ imageAlt: e.target.value })}
-                placeholder="Descripción de la imagen (para lectores de pantalla)"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm mt-2 focus:outline-none focus:ring-2 focus:ring-[#b71234]/30 focus:border-[#b71234] transition-colors"
+                placeholder="Descripción de la imagen (para lectores de pantalla) *"
+                className={`w-full border rounded-lg px-3 py-2 text-sm mt-2 focus:outline-none focus:ring-2 transition-colors ${
+                  errors.imageAlt
+                    ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
+                    : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
+                }`}
               />
+              {errors.imageAlt && <p className="mt-1 text-xs text-red-500">{errors.imageAlt}</p>}
               <div className="mt-3 rounded-lg overflow-hidden border border-gray-200 bg-gray-50 p-2">
                 <img
                   src={imageUrl}
                   alt={imageAlt || 'Preview'}
                   className="max-w-full max-h-40 mx-auto object-contain rounded"
-                  onError={(e) => { e.target.style.display = 'none' }}
-                  onLoad={(e) => { e.target.style.display = 'block' }}
+                  style={{ display: imageStatus === 'success' ? 'block' : 'none' }}
+                  onError={() => setImageStatus('error')}
+                  onLoad={() => setImageStatus('success')}
                 />
               </div>
+              {imageStatus === 'success' && (
+                <p className="mt-1 text-xs text-green-600">Imagen cargada correctamente</p>
+              )}
+              {imageStatus === 'error' && (
+                <p className="mt-1 text-xs text-red-500">La URL es incorrecta o no se cargó la imagen</p>
+              )}
             </>
           )}
         </div>

@@ -37,6 +37,7 @@ function validateSections(sections) {
     if (!s.title.trim()) e.title = 'El título es obligatorio'
     if (!s.imageUrl.trim() && isBodyEmpty(s.body)) e.content = 'Ingresá al menos una imagen o texto'
     if (s.imageUrl.trim() && !isValidHttpsUrl(s.imageUrl.trim())) e.imageUrl = 'La URL de la imagen debe ser válida y empezar con https://'
+    if (s.imageUrl.trim() && !s.imageAlt.trim()) e.imageAlt = 'La descripción de la imagen es obligatoria'
     if (s.hasButton) {
       if (!s.buttonText.trim()) e.buttonText = 'Ingresá el texto del botón'
       if (!s.buttonHref.trim()) e.buttonHref = 'Ingresá la URL del botón'
@@ -62,6 +63,7 @@ export default function App() {
           if (k === 'title') delete updated.title
           if (k === 'imageUrl' || k === 'body') delete updated.content
           if (k === 'imageUrl') delete updated.imageUrl
+          if (k === 'imageUrl' || k === 'imageAlt') delete updated.imageAlt
           if (k === 'buttonText') delete updated.buttonText
           if (k === 'buttonHref') delete updated.buttonHref
         })

@@ -22,15 +22,25 @@ function isBodyEmpty(html) {
   return html.replace(/<[^>]*>/g, '').trim() === ''
 }
 
+function isValidHttpsUrl(value) {
+  try {
+    return new URL(value).protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 function validateSections(sections) {
   const errors = {}
   sections.forEach((s) => {
     const e = {}
     if (!s.title.trim()) e.title = 'El título es obligatorio'
     if (!s.imageUrl.trim() && isBodyEmpty(s.body)) e.content = 'Ingresá al menos una imagen o texto'
+    if (s.imageUrl.trim() && !isValidHttpsUrl(s.imageUrl.trim())) e.imageUrl = 'La URL de la imagen debe ser válida y empezar con https://'
     if (s.hasButton) {
       if (!s.buttonText.trim()) e.buttonText = 'Ingresá el texto del botón'
       if (!s.buttonHref.trim()) e.buttonHref = 'Ingresá la URL del botón'
+      else if (!isValidHttpsUrl(s.buttonHref.trim())) e.buttonHref = 'La URL debe ser válida y empezar con https://'
     }
     if (Object.keys(e).length > 0) errors[s.id] = e
   })
@@ -51,6 +61,7 @@ export default function App() {
         Object.keys(changes).forEach((k) => {
           if (k === 'title') delete updated.title
           if (k === 'imageUrl' || k === 'body') delete updated.content
+          if (k === 'imageUrl') delete updated.imageUrl
           if (k === 'buttonText') delete updated.buttonText
           if (k === 'buttonHref') delete updated.buttonHref
         })

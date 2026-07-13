@@ -75,11 +75,12 @@ export default function SectionCard({ section, index, total, errors, onChange, o
             onChange={(e) => onChange({ imageUrl: e.target.value })}
             placeholder="https://..."
             className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors ${
-              errors.content
+              errors.content || errors.imageUrl
                 ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
                 : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
             }`}
           />
+          {errors.imageUrl && <p className="mt-1 text-xs text-red-500">{errors.imageUrl}</p>}
           {imageUrl.trim() && (
             <>
               <input

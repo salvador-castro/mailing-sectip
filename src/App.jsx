@@ -100,9 +100,6 @@ export default function App() {
             <h1 className="text-lg font-bold leading-tight">Mailing</h1>
             <p className="text-sm opacity-75">SECTIP · UTN FRBA</p>
           </div>
-          <span className="absolute right-4 bottom-2 text-xs text-black/60">
-            Desarrollado por salvaCastro
-          </span>
         </div>
       </header>
 
@@ -182,6 +179,10 @@ export default function App() {
         )}
 
       </main>
+
+      <footer className="max-w-3xl mx-auto px-4 py-4 flex justify-end">
+        <span className="text-xs text-black font-medium">Desarrollado por salvaCastro</span>
+      </footer>
     </div>
   )
 }

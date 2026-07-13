@@ -98,7 +98,7 @@ export default function App() {
       <header className="bg-[#b71234] text-white shadow-md">
         <div className="max-w-3xl mx-auto px-4 py-4 relative flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-lg font-bold leading-tight">MAILING v1.0</h1>
+            <h1 className="text-lg font-bold leading-tight">MAILING</h1>
             <p className="text-sm opacity-75">SECTIP · UTN FRBA</p>
           </div>
         </div>

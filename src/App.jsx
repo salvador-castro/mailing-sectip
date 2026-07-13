@@ -180,9 +180,9 @@ export default function App() {
 
       </main>
 
-      <footer className="max-w-3xl mx-auto px-4 py-4 flex justify-end">
+      <div className="fixed bottom-3 right-4 pointer-events-none">
         <span className="text-xs text-black font-medium">Desarrollado por salvaCastro</span>
-      </footer>
+      </div>
     </div>
   )
 }

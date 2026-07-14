@@ -1,13 +1,22 @@
-import { useEffect, useState } from 'react'
-import RichTextEditor from './RichTextEditor'
+import { useEffect, useState } from "react";
+import RichTextEditor from "./RichTextEditor";
 
-export default function SectionCard({ section, index, total, errors, onChange, onRemove, onMove }) {
-  const { title, imageUrl, imageAlt, body, hasButton, buttonText, buttonHref } = section
-  const [imageStatus, setImageStatus] = useState('idle') // idle | loading | success | error
+export default function SectionCard({
+  section,
+  index,
+  total,
+  errors,
+  onChange,
+  onRemove,
+  onMove,
+}) {
+  const { title, imageUrl, imageAlt, body, hasButton, buttonText, buttonHref } =
+    section;
+  const [imageStatus, setImageStatus] = useState("idle"); // idle | loading | success | error
 
   useEffect(() => {
-    setImageStatus(imageUrl.trim() ? 'loading' : 'idle')
-  }, [imageUrl])
+    setImageStatus(imageUrl.trim() ? "loading" : "idle");
+  }, [imageUrl]);
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
@@ -17,11 +26,11 @@ export default function SectionCard({ section, index, total, errors, onChange, o
           {index + 1}
         </span>
         <span className="text-sm font-medium text-gray-600">
-          {title.trim() || 'Sección sin título'}
+          {title.trim() || "Sección sin título"}
         </span>
         <div className="flex-1" />
         <button
-          onClick={() => onMove('up')}
+          onClick={() => onMove("up")}
           disabled={index === 0}
           className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-gray-700 disabled:opacity-25 rounded hover:bg-gray-100 transition-colors"
           title="Mover arriba"
@@ -29,7 +38,7 @@ export default function SectionCard({ section, index, total, errors, onChange, o
           ↑
         </button>
         <button
-          onClick={() => onMove('down')}
+          onClick={() => onMove("down")}
           disabled={index === total - 1}
           className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-gray-700 disabled:opacity-25 rounded hover:bg-gray-100 transition-colors"
           title="Mover abajo"
@@ -49,7 +58,6 @@ export default function SectionCard({ section, index, total, errors, onChange, o
 
       {/* Card body */}
       <div className="p-5 space-y-5">
-
         {/* Title */}
         <div>
           <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
@@ -62,18 +70,22 @@ export default function SectionCard({ section, index, total, errors, onChange, o
             placeholder="Ej: Convocatoria PID UTN 2026"
             className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors ${
               errors.title
-                ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
-                : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
+                ? "border-red-400 focus:ring-red-200 focus:border-red-400"
+                : "border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]"
             }`}
           />
-          {errors.title && <p className="mt-1 text-xs text-red-500">{errors.title}</p>}
+          {errors.title && (
+            <p className="mt-1 text-xs text-red-500">{errors.title}</p>
+          )}
         </div>
 
         {/* Image */}
         <div>
           <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
-            Imagen{' '}
-            <span className="font-normal normal-case text-gray-400">(opcional — pegá la URL)</span>
+            Imagen{" "}
+            <span className="font-normal normal-case text-gray-400">
+              (opcional — pegá la URL)
+            </span>
           </label>
           <input
             type="url"
@@ -82,11 +94,13 @@ export default function SectionCard({ section, index, total, errors, onChange, o
             placeholder="https://..."
             className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors ${
               errors.content || errors.imageUrl
-                ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
-                : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
+                ? "border-red-400 focus:ring-red-200 focus:border-red-400"
+                : "border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]"
             }`}
           />
-          {errors.imageUrl && <p className="mt-1 text-xs text-red-500">{errors.imageUrl}</p>}
+          {errors.imageUrl && (
+            <p className="mt-1 text-xs text-red-500">{errors.imageUrl}</p>
+          )}
           {imageUrl.trim() && (
             <>
               <input
@@ -96,26 +110,34 @@ export default function SectionCard({ section, index, total, errors, onChange, o
                 placeholder="Descripción de la imagen (para lectores de pantalla) *"
                 className={`w-full border rounded-lg px-3 py-2 text-sm mt-2 focus:outline-none focus:ring-2 transition-colors ${
                   errors.imageAlt
-                    ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
-                    : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
+                    ? "border-red-400 focus:ring-red-200 focus:border-red-400"
+                    : "border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]"
                 }`}
               />
-              {errors.imageAlt && <p className="mt-1 text-xs text-red-500">{errors.imageAlt}</p>}
+              {errors.imageAlt && (
+                <p className="mt-1 text-xs text-red-500">{errors.imageAlt}</p>
+              )}
               <div className="mt-3 rounded-lg overflow-hidden border border-gray-200 bg-gray-50 p-2">
                 <img
                   src={imageUrl}
-                  alt={imageAlt || 'Preview'}
+                  alt={imageAlt || "Preview"}
                   className="max-w-full max-h-40 mx-auto object-contain rounded"
-                  style={{ display: imageStatus === 'success' ? 'block' : 'none' }}
-                  onError={() => setImageStatus('error')}
-                  onLoad={() => setImageStatus('success')}
+                  style={{
+                    display: imageStatus === "success" ? "block" : "none",
+                  }}
+                  onError={() => setImageStatus("error")}
+                  onLoad={() => setImageStatus("success")}
                 />
               </div>
-              {imageStatus === 'success' && (
-                <p className="mt-1 text-xs text-green-600">Imagen cargada correctamente</p>
+              {imageStatus === "success" && (
+                <p className="mt-1 text-xs text-green-600">
+                  Imagen cargada correctamente
+                </p>
               )}
-              {imageStatus === 'error' && (
-                <p className="mt-1 text-xs text-red-500">La URL es incorrecta o no se cargó la imagen</p>
+              {imageStatus === "error" && (
+                <p className="mt-1 text-xs text-red-500">
+                  La URL es incorrecta o no se cargó la imagen
+                </p>
               )}
             </>
           )}
@@ -124,17 +146,23 @@ export default function SectionCard({ section, index, total, errors, onChange, o
         {/* Body */}
         <div>
           <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
-            Texto{' '}
-            <span className="font-normal normal-case text-gray-400">(opcional)</span>
+            Texto{" "}
+            <span className="font-normal normal-case text-gray-400">
+              (opcional)
+            </span>
           </label>
-          <div className={errors.content ? 'rounded-lg ring-1 ring-red-400' : ''}>
+          <div
+            className={errors.content ? "rounded-lg ring-1 ring-red-400" : ""}
+          >
             <RichTextEditor
               key={section.id}
               value={body}
               onChange={(val) => onChange({ body: val })}
             />
           </div>
-          {errors.content && <p className="mt-1 text-xs text-red-500">{errors.content}</p>}
+          {errors.content && (
+            <p className="mt-1 text-xs text-red-500">{errors.content}</p>
+          )}
         </div>
 
         {/* Button */}
@@ -146,7 +174,9 @@ export default function SectionCard({ section, index, total, errors, onChange, o
               onChange={(e) => onChange({ hasButton: e.target.checked })}
               className="w-4 h-4 rounded accent-[#b71234] cursor-pointer"
             />
-            <span className="text-sm font-medium text-gray-700">Agregar botón</span>
+            <span className="text-sm font-medium text-gray-700">
+              Agregar botón
+            </span>
           </label>
 
           {hasButton && (
@@ -159,11 +189,15 @@ export default function SectionCard({ section, index, total, errors, onChange, o
                   placeholder="Texto del botón"
                   className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors ${
                     errors.buttonText
-                      ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
-                      : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
+                      ? "border-red-400 focus:ring-red-200 focus:border-red-400"
+                      : "border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]"
                   }`}
                 />
-                {errors.buttonText && <p className="mt-1 text-xs text-red-500">{errors.buttonText}</p>}
+                {errors.buttonText && (
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.buttonText}
+                  </p>
+                )}
               </div>
               <div>
                 <input
@@ -173,11 +207,15 @@ export default function SectionCard({ section, index, total, errors, onChange, o
                   placeholder="URL de destino (https://...)"
                   className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors ${
                     errors.buttonHref
-                      ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
-                      : 'border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]'
+                      ? "border-red-400 focus:ring-red-200 focus:border-red-400"
+                      : "border-gray-300 focus:ring-[#b71234]/30 focus:border-[#b71234]"
                   }`}
                 />
-                {errors.buttonHref && <p className="mt-1 text-xs text-red-500">{errors.buttonHref}</p>}
+                {errors.buttonHref && (
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.buttonHref}
+                  </p>
+                )}
               </div>
               {buttonText.trim() && (
                 <div className="pt-1">
@@ -189,8 +227,7 @@ export default function SectionCard({ section, index, total, errors, onChange, o
             </div>
           )}
         </div>
-
       </div>
     </div>
-  )
+  );
 }

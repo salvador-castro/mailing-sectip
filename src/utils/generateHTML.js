@@ -1,15 +1,15 @@
 function escapeHtml(str) {
   return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function isEmptyBody(html) {
-  if (!html || html.trim() === '') return true
-  const stripped = html.replace(/<[^>]*>/g, '').trim()
-  return stripped === ''
+  if (!html || html.trim() === "") return true;
+  const stripped = html.replace(/<[^>]*>/g, "").trim();
+  return stripped === "";
 }
 
 function buttonBlock(text, href) {
@@ -22,37 +22,38 @@ function buttonBlock(text, href) {
                     </td>
                   </tr>
                 </tbody>
-              </table>`
+              </table>`;
 }
 
 function sectionBlock(section) {
-  const { title, imageUrl, imageAlt, body, hasButton, buttonText, buttonHref } = section
-  const parts = []
+  const { title, imageUrl, imageAlt, body, hasButton, buttonText, buttonHref } =
+    section;
+  const parts = [];
 
   if (title.trim()) {
-    parts.push(`              <h1>${escapeHtml(title.trim())}</h1>`)
+    parts.push(`              <h1>${escapeHtml(title.trim())}</h1>`);
   }
 
   if (imageUrl.trim()) {
     parts.push(`              <div align="center" style="margin:10px 0;">
-                <img src="${escapeHtml(imageUrl.trim())}" alt="${escapeHtml(imageAlt || '')}" width="550" style="max-width:100%;display:block;border:0;margin:0 auto;">
-              </div>`)
+                <img src="${escapeHtml(imageUrl.trim())}" alt="${escapeHtml(imageAlt || "")}" width="550" style="max-width:100%;display:block;border:0;margin:0 auto;">
+              </div>`);
   }
 
   if (!isEmptyBody(body)) {
     parts.push(`              <div align="justify" style="color:#000;text-align:justify;font-family:Arial;font-size:14px;line-height:1.6;">
                 ${body}
-              </div>`)
+              </div>`);
   }
 
   if (hasButton && buttonText.trim() && buttonHref.trim()) {
-    parts.push(buttonBlock(buttonText.trim(), buttonHref.trim()))
+    parts.push(buttonBlock(buttonText.trim(), buttonHref.trim()));
   }
 
-  if (parts.length === 0) return ''
+  if (parts.length === 0) return "";
 
   return `
-      <!-- ===== SECCIÓN: ${escapeHtml(title || '(sin título)')} ===== -->
+      <!-- ===== SECCIÓN: ${escapeHtml(title || "(sin título)")} ===== -->
       <tr>
         <td>
           <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
@@ -60,29 +61,26 @@ function sectionBlock(section) {
             <tbody>
               <tr>
                 <td style="text-align:center;color:#b71234;">
-${parts.join('\n')}
+${parts.join("\n")}
                 </td>
               </tr>
             </tbody>
           </table>
         </td>
-      </tr>`
+      </tr>`;
 }
 
 function buildPreheader(sections) {
   return sections
     .map((s) => s.title.trim())
     .filter(Boolean)
-    .join(' | ')
+    .join(" | ");
 }
 
 export function generateHTML(sections) {
-  const sectionBlocks = sections
-    .map(sectionBlock)
-    .filter(Boolean)
-    .join('\n')
+  const sectionBlocks = sections.map(sectionBlock).filter(Boolean).join("\n");
 
-  const preheader = buildPreheader(sections)
+  const preheader = buildPreheader(sections);
 
   return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -93,13 +91,17 @@ export function generateHTML(sections) {
 </head>
 
 <body>
-${preheader ? `  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#ffffff;">
+${
+  preheader
+    ? `  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#ffffff;">
     ${escapeHtml(preheader)}
   </div>
   <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">
     &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
-` : ''}
+`
+    : ""
+}
   <table style="max-width:590px!important;width:590px;" border="0" width="590" cellspacing="0" cellpadding="0" align="center">
     <tbody>
 
@@ -170,5 +172,5 @@ ${sectionBlocks}
   </table>
 
 </body>
-</html>`
+</html>`;
 }

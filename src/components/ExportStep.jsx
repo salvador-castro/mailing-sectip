@@ -1,40 +1,42 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function ExportStep({ html, onBack }) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   function handleCopy() {
     navigator.clipboard.writeText(html).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2500)
-    })
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
   }
 
   function handleDownload() {
-    const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'mailing-sectip.html'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "mailing-sectip.html";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
 
   function handlePreview() {
-    const blob = new Blob([html], { type: 'text/html' })
-    const url = URL.createObjectURL(blob)
-    window.open(url, '_blank')
+    const blob = new Blob([html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
   }
 
   return (
     <div className="space-y-6">
       {/* Main export card */}
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-gray-800 mb-1">Listo para exportar</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-1">
+          Listo para exportar
+        </h2>
         <p className="text-sm text-gray-500 mb-6">
-          Copiá el HTML y pegalo en el{' '}
+          Copiá el HTML y pegalo en el{" "}
           <a
             href="https://sia.frba.utn.edu.ar/"
             target="_blank"
@@ -49,12 +51,13 @@ export default function ExportStep({ html, onBack }) {
         <div className="flex flex-wrap gap-3">
           <button
             onClick={handleCopy}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all ${copied
-              ? 'bg-green-600 text-white'
-              : 'bg-[#b71234] text-white hover:bg-[#9a0f2a]'
-              }`}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all ${
+              copied
+                ? "bg-green-600 text-white"
+                : "bg-[#b71234] text-white hover:bg-[#9a0f2a]"
+            }`}
           >
-            {copied ? '✓ ¡Copiado!' : 'Copiar HTML'}
+            {copied ? "✓ ¡Copiado!" : "Copiar HTML"}
           </button>
 
           <button
@@ -79,7 +82,9 @@ export default function ExportStep({ html, onBack }) {
           <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
             HTML generado
           </span>
-          <span className="text-xs text-gray-400">{html.length.toLocaleString()} caracteres</span>
+          <span className="text-xs text-gray-400">
+            {html.length.toLocaleString()} caracteres
+          </span>
         </div>
         <pre className="p-4 text-xs text-gray-600 overflow-x-auto max-h-72 overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
           {html}
@@ -93,5 +98,5 @@ export default function ExportStep({ html, onBack }) {
         ← Volver a editar
       </button>
     </div>
-  )
+  );
 }

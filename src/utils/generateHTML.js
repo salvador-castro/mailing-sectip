@@ -117,7 +117,7 @@ ${
           <div align="center">
             <img src="https://lh3.googleusercontent.com/pw/AP1GczPlnuWOo4bixukEiIR5qG6LqvQcsxE3peef5m0ZmJZF2eqzZppMwB56PR8JwwF7SR6UVvmeRudgIghCFUY82OA28ct99X_zc4buFYImOqBqf5Tlo8BOzXW9ffK1Xz5kQeoaNf_uzdDQuKWWkRvFxHRUbQ=w1366-h541-s-no"
                  alt="Encabezado UTN FRBA"
-                 width="590"
+                 width="300"
                  style="display:block;border:0;">
           </div>
         </td>

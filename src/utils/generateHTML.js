@@ -115,9 +115,9 @@ ${
       <tr>
         <td>
           <div align="center">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczPlnuWOo4bixukEiIR5qG6LqvQcsxE3peef5m0ZmJZF2eqzZppMwB56PR8JwwF7SR6UVvmeRudgIghCFUY82OA28ct99X_zc4buFYImOqBqf5Tlo8BOzXW9ffK1Xz5kQeoaNf_uzdDQuKWWkRvFxHRUbQ=w1366-h541-s-no"
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLXUVWWmHamD2hlQWBVrcdCnr1usswU6tXIc4Oq15gC3UvyA1voW7iq6rAUQDewOznlDGHgPqjf6TB_xlnjsz5FYjFbOnq7TgMOudyT1ThywMkWpOMuGGvbTpqgtTxu8dYJeKqXMRim1GOO7IWkHUqM=w1398-h255-no?authuser=0"
                  alt="Encabezado UTN FRBA"
-                 width="300"
+                 width="590"
                  style="display:block;border:0;">
           </div>
         </td>
